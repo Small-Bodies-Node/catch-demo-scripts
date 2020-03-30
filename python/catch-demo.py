@@ -1,4 +1,15 @@
 #!/usr/bin/env python
+"""
+Fully functional Python script for the CATCH API.
+
+CATCH is a search tool for finding comets and asteroids in NEO and time-domain
+survey data, hosted by the Planetary Data System's Small Bodies Node:
+
+https://catch.astro.umd.edu/
+
+Requires: astropy, requests, and sseclient
+
+"""
 import sys
 import argparse
 import requests
