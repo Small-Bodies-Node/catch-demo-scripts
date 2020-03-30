@@ -1,7 +1,7 @@
 # Demo Python Scripts for CATCH API
 
 ## Introduction
-Demonstration scripts for interacting with the CATCH APIs using Python.
+Demonstration scripts for interacting with the CATCH API using Python.
 
 ## catch-minimal.py
 
@@ -61,6 +61,11 @@ API routes:
     caught/labels       retrieve descriptions for caught field/columns
     query/moving        search for a target
     stream              inspect CATCH event stream
+```
+
+Get help on query/moving sub-command:
+```
+python3 catch-demo.py query/moving --help
 ```
 
 Execute a new query for comet 65P, do not return cached results:
