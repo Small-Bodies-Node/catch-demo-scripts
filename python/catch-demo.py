@@ -13,6 +13,7 @@ Requires: astropy, requests, and sseclient
 import sys
 import argparse
 import requests
+import json
 from uuid import UUID
 from sseclient import SSEClient
 from astropy.table import Table
@@ -49,19 +50,29 @@ def query_moving(args):
         print('{}'.format(msg, file=sys.stderr))
         return
 
-    # If 'queued' is True...
+    # If 'queued' is True, listen to the CATCH event stream until a message
+    # with our job ID prefix (first 8 characters) is 'success' or 'error'.
     if data['queued']:
         # listen to event stream
         messages = SSEClient('{}/stream'.format(args.base))
-        print('Waiting for job ID {} to complete...'.format(
-            data['job_id']), file=sys.stderr)
+        print('Connected to stream...', file=sys.stderr)
 
-        # Cycle through the messages.  When our job ID is published to the
-        # stream, results are ready.
-        for msg in messages:
-            if msg.data == data['job_id']:
-                break
-        print('...completed.', file=sys.stderr)
+        # cycle through the messages
+        for message in messages:
+            message_data = json.loads(message.data)
+
+            # edit out keep-alive messages
+            if not isinstance(message_data, dict):
+                continue
+
+            # is this message for us?
+            if message_data['job_prefix'] == data['job_id'][:8]:
+                # print the message text
+                print(message_data['text'], file=sys.stderr)
+
+                # message status may be 'success', 'error', 'running', 'queued'
+                if message_data['status'] in ['error', 'success']:
+                    break
 
     # 'results' is the URL to the search results
     res = requests.get(data['results'])

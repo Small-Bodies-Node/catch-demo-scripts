@@ -12,6 +12,7 @@ Requires: requests, sseclient
 (requests and sseclient greatly simplifies listening to the CATCH event stream)
 
 """
+import json
 import requests
 from sseclient import SSEClient
 
@@ -29,12 +30,23 @@ res = requests.get('https://catch.astro.umd.edu/catch/query/moving',
 # response is JSON formatted
 data = res.json()
 
-# If 'queued' is True, listen to the CATCH event stream until our job ID is
-# published.
+# If 'queued' is True, listen to the CATCH event stream until a message
+# with our job ID prefix (first 8 characters) is 'success' or 'error'.
 if data['queued']:
     messages = SSEClient('https://catch.astro.umd.edu/catch/stream')
-    for msg in messages:
-        if msg.data == data['job_id']:
+    for message in messages:
+        message_data = json.loads(message.data)
+
+        # edit out keep-alive messages
+        if not isinstance(message_data, dict):
+            continue
+
+        if message_data['job_prefix'] == data['job_id'][:8]:
+            # this message is for us, print the text
+            print(message_data['text'], file=sys.stderr)
+
+        # Message status may be 'success', 'error', 'running', 'queued'.
+        if message_data['status'] in ['error', 'success']:
             break
 
 # 'results' is the URL to the search results
