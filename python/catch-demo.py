@@ -42,6 +42,13 @@ def query_moving(args):
     # response is JSON formatted
     data = res.json()
 
+    # if 'results' is missing, an error occured
+    if data.get('results') is None:
+        # There should be an error message, but if not, print "unknown error"
+        msg = data.get('message', 'unknown error')
+        print('{}'.format(msg, file=sys.stderr))
+        return
+
     # If 'queued' is True...
     if data['queued']:
         # listen to event stream
