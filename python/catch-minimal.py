@@ -12,6 +12,7 @@ Requires: requests, sseclient
 (requests and sseclient greatly simplifies listening to the CATCH event stream)
 
 """
+import sys
 import json
 import requests
 from sseclient import SSEClient
