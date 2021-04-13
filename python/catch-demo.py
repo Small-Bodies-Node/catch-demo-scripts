@@ -153,7 +153,7 @@ def format_caught_data(data, format):
 
 # command-line interface
 parser = argparse.ArgumentParser()
-parser.add_argument('--base', default='https://catch.astro.umd.edu/catch',
+parser.add_argument('--base', default='https://catch.astro.umd.edu/api',
                     help='base URL for query, e.g., https://host/location')
 
 subparsers = parser.add_subparsers(title='API routes')
