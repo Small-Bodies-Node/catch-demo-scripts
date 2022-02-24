@@ -1,6 +1,7 @@
 # Demo Python Scripts for CATCH API
 
 ## Introduction
+
 Demonstration scripts for interacting with the CATCH API using Python.
 
 ## catch-minimal.py
@@ -8,25 +9,29 @@ Demonstration scripts for interacting with the CATCH API using Python.
 Near-minimal script to search for comet 65P and display the results.
 
 ### Requires
-  * Python 3.5+
-  * requests
-  * sseclient
+
+* Python 3.5+
+* requests
+* sseclient
 
 Requirements may be installed, e.g.,
-```
+
+```bash
 pip install requests sseclient
 ```
 
 ### Usage
-```
+
+```bash
 python3 catch-minimal.py
 ```
 
 The result is JSON-formatted data.  Example output:
-```
-{'count': 14, 'data': [{'airmass': 1.038482, 'archive_url': 'https://musforti.astro.umd.edu/catch-images/xxx/neat/tricam/data/p20020222/obsdata/20020222120052c.fits', 'cutout_url': 'https://musforti.astro.umd.edu/catch-images/yyy/65P_P20020222_OBSDATA_20020222120052C_ra174.62244_dec+17.97594_5arcmin.fits', 'ddec': 13.76413, 'dec': 17.97594, 'delta': 2.49069893970196, 'designation': '65P', 'dra': -23.1946, 'exposure': 60.0, 'filter': 'NONE', 'instrument': 'NEAT PALOMAR TRI-CAMERA', 'jd': 2452328.00094907, 'phase': 5.6655, 'productid': 'P20020222_OBSDATA_20020222120052C', 'ra': 174.62244, 'rdot': -5.1794841, 'rh': 3.436865451122, 'sangle': 69.623, 'selong': 159.9563, 'thumbnail_url': 'https://musforti.astro.umd.edu/catch-images/zzz/65P_P20020222_OBSDATA_20020222120052C_ra174.62244_dec+17.97594_5arcmin_thumb.jpg', 'tmtp': -443.404247950763, 'trueanomaly': 258.84013063711, 'unc_a': 5.65, 'unc_b': 0.393, 'unc_theta': -24.108, 'vangle': 114.761, 'vmag': 17.0},
+
+```json
+{"count": 15, "data": [{"airmass": 1.055449, "archive_url": "https://catch.astro.umd.edu/catch-images/archive/neat/tricam/data/p20020121/obsdata/20020121132624c.fits", "cutout_url": "https://catch.astro.umd.edu/catch-images/cutouts/65P_P20020121_OBSDATA_20020121132624C_ra177.51011_dec+15.25013_5arcmin.fits", "ddec": 9.813682, "dec": 15.25013, "delta": 2.83330835061683, "designation": "65P", "dra": -2.64437, "exposure": 60.0, "filter": "NONE", "instrument": "NEAT PALOMAR TRI-CAMERA", "jd": 2452296.06034722, "phase": 12.5942, "preview_url": "https://catch.astro.umd.edu/catch-images/thumbnails/65P_P20020121_OBSDATA_20020121132624C_ra177.51011_dec+15.25013_5arcmin.jpg", "productid": "P20020121_OBSDATA_20020121132624C", "ra": 177.51011, "rdot": -5.0789549, "rh": 3.531535016579, "sangle": 103.483, "selong": 128.5424, "source": "neat_palomar", "thumbnail_url": "https://catch.astro.umd.edu/catch-images/thumbnails/65P_P20020121_OBSDATA_20020121132624C_ra177.51011_dec+15.25013_5arcmin_thumb.jpg", "tmtp": -475.346708036959, "trueanomaly": 254.187062889922, "unc_a": 4.967, "unc_b": 0.359, "unc_theta": 115.651, "vangle": 116.105, "vmag": 17.382},
 ...
-}], 'job_id': '53bb8e290e814bccbc242cd5f8a33b9d'}
+], "job_id": "2837a35c11d640e1a81e3381dbecb024"}
 ```
 
 ## catch-demo.py
@@ -34,19 +39,23 @@ The result is JSON-formatted data.  Example output:
 A fully-featured script for interacting with the CATCH APIs.  This script can execute new searches, retrieve results from a prior search, retrieve column metadata for the results, and inspect the CATCH event stream (for debugging purposes).
 
 ### Requires
-  * Python 3.5+
-  * requests
-  * sseclient
-  * astropy
+
+* Python 3.5+
+* requests
+* sseclient
+* astropy
 
 Requirements may be installed, e.g.,
-```
+
+```bash
 pip install astropy requests sseclient
 ```
 
 ### Usage
+
 See the script help and available commands:
-```
+
+```bash
 $ python3 catch-demo.py --help
 usage: catch-demo.py [-h] [--base BASE]
                      {caught,caught/labels,query/moving,stream} ...
@@ -64,21 +73,25 @@ API routes:
 ```
 
 Get help on query/moving sub-command:
-```
+
+```bash
 python3 catch-demo.py query/moving --help
 ```
 
 Execute a new query for comet 65P, do not return cached results:
-```
+
+```bash
 python3 catch-demo.py query/moving 65P --force
 ```
 
 Repeat the last search, but allow cached data, if available.  Print the data using the JSON format:
-```
+
+```bash
 python3 catch-demo.py query/moving 65P --format=json
 ```
 
 Get descriptions of the columns/fields (including units):
-```
+
+```bash
 python3 catch-demo.py caught/labels
 ```

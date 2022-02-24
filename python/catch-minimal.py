@@ -58,4 +58,4 @@ res = requests.get(data['results'])
 # response is JSON formatted
 data = res.json()
 
-print(data)
+print(json.dumps(data))
