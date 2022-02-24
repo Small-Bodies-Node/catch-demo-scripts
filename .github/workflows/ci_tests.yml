@@ -1,0 +1,31 @@
+# GitHub Actions workflow for testing and continuous integration.
+
+name: Continuous Integration Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  ci_tests:
+    name: python
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Set up python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install base dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install requests sseclient astropy pytest
+    - name: Run tests
+      run: |
+        cd python
+        pytest -v
