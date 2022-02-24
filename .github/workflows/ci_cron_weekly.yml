@@ -5,7 +5,7 @@ name: Weekly Continuous Integration Tests
 on:
   schedule:
     # run at 6am UTC on Sundays
-    - cron: '0 6 * * 7'
+    - cron:  '0 6 * * 0'
 
 jobs:
   ci_tests:
