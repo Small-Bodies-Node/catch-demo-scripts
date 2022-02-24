@@ -1,6 +1,6 @@
 # GitHub Actions workflow for testing and continuous integration.
 
-name: Continuous Integration Tests
+name: Weekly Continuous Integration Tests
 
 on:
   schedule:
