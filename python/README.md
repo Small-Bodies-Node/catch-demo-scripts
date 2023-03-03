@@ -1,4 +1,4 @@
-# Demo Python Scripts for CATCH API
+# Demo Python Scripts for CATCH API v2.0
 
 ## Introduction
 
@@ -48,7 +48,13 @@ A fully-featured script for interacting with the CATCH APIs.  This script can ex
 Requirements may be installed, e.g.,
 
 ```bash
-pip install astropy requests sseclient
+pip install requests sseclient
+```
+
+Optionally install astropy for creating tables.
+
+```bash
+pip install astropy
 ```
 
 ### Usage
@@ -57,41 +63,36 @@ See the script help and available commands:
 
 ```bash
 $ python3 catch-demo.py --help
-usage: catch-demo.py [-h] [--base BASE]
-                     {caught,caught/labels,query/moving,stream} ...
+usage: catch-demo.py [-h] [--base BASE] {sources,catch,caught,status/job_id,status/sources,stream} ...
 
 optional arguments:
   -h, --help            show this help message and exit
   --base BASE           base URL for query, e.g., https://host/location
 
 API routes:
-  {caught,caught/labels,query/moving,stream}
+  {sources,catch,caught,status/job_id,status/sources,stream}
+    sources             show allowed sources
+    catch               search for a moving target
     caught              retrieve caught object data
-    caught/labels       retrieve descriptions for caught field/columns
-    query/moving        search for a target
+    status/job_id       retrieve job status
+    status/sources      retrieve source database summary
     stream              inspect CATCH event stream
 ```
 
-Get help on query/moving sub-command:
+Get help on catch sub-command:
 
 ```bash
-python3 catch-demo.py query/moving --help
+python3 catch-demo.py catch --help
 ```
 
 Execute a new query for comet 65P, do not return cached results:
 
 ```bash
-python3 catch-demo.py query/moving 65P --force
+python3 catch-demo.py catch 65P --force
 ```
 
 Repeat the last search, but allow cached data, if available.  Print the data using the JSON format:
 
 ```bash
-python3 catch-demo.py query/moving 65P --format=json
-```
-
-Get descriptions of the columns/fields (including units):
-
-```bash
-python3 catch-demo.py caught/labels
+python3 catch-demo.py catch 65P --format=json
 ```
