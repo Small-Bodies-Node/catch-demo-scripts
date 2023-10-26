@@ -229,8 +229,8 @@ def format_data(data, format):
 
 # command-line interface
 parser = argparse.ArgumentParser()
-parser.add_argument('--base', default='https://catch.astro.umd.edu/api',
-                    help='base URL for query, e.g., https://host/location')
+parser.add_argument('--base', default='https://catch-api.astro.umd.edu',
+                    help='base URL for query, e.g., https://catch-api.astro.umd.edu')
 
 subparsers = parser.add_subparsers(title='API routes')
 
