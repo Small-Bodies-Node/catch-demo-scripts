@@ -29,7 +29,7 @@ params = {
     "cached": "false"
 }
 
-base_url = "https://catch.astro.umd.edu/api"
+base_url = "https://catch-api.astro.umd.edu"
 
 # API route for searches is .../catch
 res = requests.get(base_url + "/catch", params=params)
