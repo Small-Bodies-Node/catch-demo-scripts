@@ -8,7 +8,7 @@ Demonstration scripts for interacting with the CATCH API using Python.
 
 Near-minimal script to search for comet 65P and display the results.
 
-### Requires
+### Dependencies
 
 - Python 3.8+
 - requests
@@ -38,7 +38,7 @@ The result is JSON-formatted data. Example output:
 
 Minimal script to search for M15 and display the results.
 
-### Requires
+### Dependencies
 
 - Python 3.8+
 - requests
@@ -67,12 +67,12 @@ The result is JSON-formatted data. Example output:
 
 A fully-featured script for interacting with the CATCH APIs. This script can execute new searches, retrieve results from a prior search, retrieve column metadata for the results, and inspect the CATCH event stream (for debugging purposes).
 
-### Requires
+### Dependencies
 
 - Python 3.8+
 - requests
-- sseclient
-- astropy
+- sseclient (optional for tabular output)
+- astropy (optional for moving target queries)
 
 Dependencies may be installed, e.g.,
 
@@ -80,11 +80,11 @@ Dependencies may be installed, e.g.,
 pip install requests
 ```
 
-Optionally install astropy for creating tables, or sseclient for .
+Optionally install astropy and/or sseclient:
 
 ```bash
 pip install astropy
-pip install sseclient  # required for moving target queries
+pip install sseclient
 ```
 
 ### Usage
