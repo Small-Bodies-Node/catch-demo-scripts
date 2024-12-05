@@ -7,10 +7,16 @@ survey data, hosted by the Planetary Data System's Small Bodies Node:
 
 https://catch.astro.umd.edu/
 
+
+Get documentation for the command-line options:
+
+    python3 catch.py --help
+
+
 Requires: requests
 Optional:
     * astropy for table-formatted output
-    * sseclient for moving target queries
+    * sseclient is required for moving target queries
 
 """
 import sys

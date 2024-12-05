@@ -21,9 +21,15 @@ from sseclient import SSEClient
 
 # Set up parameters:
 #   * search for comet 65P
-#   * do not retrieve cached results, but run a new search on the database
-# See https://catch-api.astro.umd.edu/ui for other options.
-params = {"target": "65P", "sources": "neat_palomar_tricam", "cached": "false"}
+#   * only search the NEAT Palomar Tricam data set
+#   * do not retrieve cached results, but run a new search on the database See
+# See the API documentation, https://catch-api.astro.umd.edu/ui, for other
+# options.
+params = {
+    "target": "65P",
+    "sources": "neat_palomar_tricam",
+    "cached": "false",
+}
 
 base_url = "https://catch-api.astro.umd.edu"
 
