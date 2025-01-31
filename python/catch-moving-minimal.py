@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 """
-Minimal Python script for moving target queries with the CATCH API v2.0.
+Minimal Python script for moving target queries with the CATCH API v3.0.
 
-CATCH is a search tool for finding comets and asteroids in NEO and time-domain
-survey data, hosted by the Planetary Data System's Small Bodies Node:
+CATCH is a search tool for searching time-domain survey data, hosted by the
+Planetary Data System's Small Bodies Node:
 
 https://catch.astro.umd.edu/
 
@@ -21,12 +21,14 @@ from sseclient import SSEClient
 
 # Set up parameters:
 #   * search for comet 65P
-#   * do not retrieve cached results, but run a new search on the database
-# See https://catch.astro.umd.edu/apis for other options.
+#   * only search the NEAT Palomar Tricam data set
+#   * do not retrieve cached results, but run a new search on the database See
+# See the API documentation, https://catch-api.astro.umd.edu/ui, for other
+# options.
 params = {
     "target": "65P",
     "sources": "neat_palomar_tricam",
-    "cached": "false"
+    "cached": "false",
 }
 
 base_url = "https://catch-api.astro.umd.edu"
@@ -39,7 +41,7 @@ data = res.json()
 
 # If 'queued' is True, listen to the CATCH event stream until a message
 # with our job ID prefix (first 8 characters) is 'success' or 'error'.
-if data['queued']:
+if data["queued"]:
     messages = SSEClient(base_url + "/stream")
     for message in messages:
         # ignore blank lines
@@ -54,7 +56,7 @@ if data['queued']:
 
         if message_data["job_prefix"] == data["job_id"][:8]:
             # this message is for us, print the text
-            print(message_data['text'], file=sys.stderr)
+            print(message_data["text"], file=sys.stderr)
         else:
             continue
 
